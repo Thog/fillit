@@ -6,7 +6,7 @@
 /*   By: tguillem <tguillem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/02 17:19:06 by tguillem          #+#    #+#             */
-/*   Updated: 2015/12/02 17:31:54 by tguillem         ###   ########.fr       */
+/*   Updated: 2015/12/02 19:42:24 by tguillem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 # define FILLIT_H
 # include <stdlib.h>
 # include <unistd.h>
-
+# include <fcntl.h>
+char	*read_file(char *file);
 char	**prepare_fill(char *fname);
 char	*fillit(char **shapes);
 int	ft_strlen(const char *s);

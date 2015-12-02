@@ -6,7 +6,7 @@
 /*   By: tguillem <tguillem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/02 17:22:59 by tguillem          #+#    #+#             */
-/*   Updated: 2015/12/02 17:23:38 by tguillem         ###   ########.fr       */
+/*   Updated: 2015/12/02 19:55:01 by tguillem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,7 @@
 
 char	*fillit(char **shapes)
 {
-	return (NULL);
+	if (shapes == NULL)
+		return ("");
+	return ("");
 }
