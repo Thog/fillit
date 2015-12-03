@@ -6,7 +6,7 @@
 /*   By: tguillem <tguillem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/02 17:05:08 by tguillem          #+#    #+#             */
-/*   Updated: 2015/12/02 17:32:53 by tguillem         ###   ########.fr       */
+/*   Updated: 2015/12/03 10:33:57 by tguillem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int	main(int argc, char **argv)
 {
 	char	*result;
 	char	**shapes;
+
 	if (argc > 1)
 	{
 		shapes = prepare_fill(*(argv + 1));
@@ -25,7 +26,7 @@ int	main(int argc, char **argv)
 			return (0);
 		}
 		result = fillit(shapes);
-		write(1, result, ft_strlen(result));	
+		write(1, result, ft_strlen(result));
 	}
 	return (0);
 }
