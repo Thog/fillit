@@ -6,12 +6,12 @@
 /*   By: tguillem <tguillem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/02 17:05:08 by tguillem          #+#    #+#             */
-/*   Updated: 2015/12/03 10:33:57 by tguillem         ###   ########.fr       */
+/*   Updated: 2015/12/03 11:57:04 by tguillem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
-
+#include <stdio.h>
 int	main(int argc, char **argv)
 {
 	char	*result;
@@ -20,6 +20,7 @@ int	main(int argc, char **argv)
 	if (argc > 1)
 	{
 		shapes = prepare_fill(*(argv + 1));
+		printf("%s\n", *(shapes + 2));
 		if (shapes == NULL)
 		{
 			write(1, "error\n", 5);

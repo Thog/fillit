@@ -10,7 +10,7 @@
 #*                                                                            *#
 #* ************************************************************************** *#
 
-CFLAGS = -Wextra -Wall -Werror -I./includes
+CFLAGS = -g -Wextra -Wall -Werror -I./includes
 CC = gcc
 
 NAME = fillit
