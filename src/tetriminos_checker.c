@@ -6,12 +6,11 @@
 /*   By: tguillem <tguillem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/02 17:24:09 by tguillem          #+#    #+#             */
-/*   Updated: 2015/12/03 12:09:59 by tguillem         ###   ########.fr       */
+/*   Updated: 2015/12/03 13:57:41 by tguillem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
-#include <stdio.h>
 
 char	**alloc_piece()
 {
@@ -35,9 +34,11 @@ char	**compute_file(char *fcontent)
 	char	**result;
 	int		c;
 	int		l;
+	int		i;
 
 	c = 0;
 	l = 0;
+	i = 0;
 	result = alloc_piece();
 	if (!result)
 		return (NULL);
@@ -46,14 +47,16 @@ char	**compute_file(char *fcontent)
 		if (*fcontent == '\n')
 		{
 			l = 0;
-			c++;
-			if (*(fcontent + 1) == '\n')
+			if (*(fcontent + 1) == '\n' && (i = 1))
 				c = 0;
-			printf("%d\n", c);
+			else if(!i)
+			{
+				c++;
+			} else
+				i = 0;
 		} else
 		{
 			result[c][l] = *fcontent;
-			printf("result[%d][%d] = %c;\n", c, l, *fcontent);
 			l++;
 		}
 		fcontent++;
