@@ -6,7 +6,7 @@
 /*   By: tguillem <tguillem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/02 17:24:09 by tguillem          #+#    #+#             */
-/*   Updated: 2015/12/03 13:57:41 by tguillem         ###   ########.fr       */
+/*   Updated: 2015/12/04 15:44:57 by tguillem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ char	**compute_file(char *fcontent)
 		return (NULL);
 	while(*fcontent)
 	{
+		if (c > 4 || l > 4)
+			return (NULL);
 		if (*fcontent == '\n')
 		{
 			l = 0;
