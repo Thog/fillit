@@ -6,13 +6,13 @@
 /*   By: tguillem <tguillem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/02 17:24:09 by tguillem          #+#    #+#             */
-/*   Updated: 2015/12/04 15:44:57 by tguillem         ###   ########.fr       */
+/*   Updated: 2015/12/07 09:41:50 by tguillem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-char	**alloc_piece()
+char	**alloc_piece(void)
 {
 	int		n;
 	char	**result;
@@ -29,9 +29,10 @@ char	**alloc_piece()
 	return (result);
 }
 
-char	**compute_file(char *fcontent)
+char	***separe_shapes(char *fcontent)
 {
-	char	**result;
+	char	***result;
+	char	***origin;
 	int		c;
 	int		l;
 	int		i;
@@ -39,10 +40,11 @@ char	**compute_file(char *fcontent)
 	c = 0;
 	l = 0;
 	i = 0;
-	result = alloc_piece();
+	result = (char ***)malloc(sizeof(char**) * 27);
+	origin = result--;
 	if (!result)
 		return (NULL);
-	while(*fcontent)
+	while (*fcontent)
 	{
 		if (c > 4 || l > 4)
 			return (NULL);
@@ -51,29 +53,32 @@ char	**compute_file(char *fcontent)
 			l = 0;
 			if (*(fcontent + 1) == '\n' && (i = 1))
 				c = 0;
-			else if(!i)
-			{
+			else if (!i)
 				c++;
-			} else
+			else
 				i = 0;
-		} else
+		}
+		else
 		{
-			result[c][l] = *fcontent;
-			l++;
+			if (!l && !c)
+				*(++result) = alloc_piece();
+			*(*(*(result) + c) + l++) = *fcontent;
 		}
 		fcontent++;
 	}
-	return (result);
+	return (origin);
 }
 
 char	**prepare_fill(char *fname)
 {
 	char	*filecontent;
+	char	***pieces;
 
 	filecontent = read_file(fname);
 	if (!filecontent)
 	{
 		return (NULL);
 	}
-	return (compute_file(filecontent));
+	pieces = separe_shapes(filecontent);
+	return (pieces[1]);
 }
