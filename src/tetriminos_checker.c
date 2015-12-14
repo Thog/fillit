@@ -6,7 +6,7 @@
 /*   By: tguillem <tguillem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/02 17:24:09 by tguillem          #+#    #+#             */
-/*   Updated: 2015/12/07 09:41:50 by tguillem         ###   ########.fr       */
+/*   Updated: 2015/12/14 17:31:03 by bel-baz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,16 +69,61 @@ char	***separe_shapes(char *fcontent)
 	return (origin);
 }
 
-char	**prepare_fill(char *fname)
+char	*parse_shapes(char ***shapes)
+{
+	int		nb;
+	int		i;
+	int		j;
+	int		k;
+	int		chars;
+	char	*parsed;
+
+	nb = 0;
+	i = 0;
+	while (*(shapes + i))
+	{
+		nb++;
+		char c = nb + '0';
+		write(1, &c, 1);
+	}
+	i = 0;
+	if ((parsed = (char*)malloc(sizeof(char) * nb)) == NULL)
+		return (NULL);
+	write(1, "test", 4);
+	while (i < nb)
+	{
+		chars = 0;
+		j = 0;
+		while (*(*(shapes + i) + j))
+		{
+			k = 0;
+			while (*(*(*(shapes + i) + j) + k))
+			{
+				if (*(*(*(shapes + i) + j) + k) == '#')
+					chars++;
+				k++;
+			}
+			j++;
+		}
+		if (chars > 4)
+		{
+			write(1, "error\n", 5);
+			return (NULL);
+		}
+		chars = 0;
+		i++;
+	}
+	return (parsed);
+}
+
+char	*prepare_fill(char *fname)
 {
 	char	*filecontent;
-	char	***pieces;
 
 	filecontent = read_file(fname);
 	if (!filecontent)
 	{
 		return (NULL);
 	}
-	pieces = separe_shapes(filecontent);
-	return (pieces[1]);
+	return (parse_shapes(separe_shapes(filecontent)));
 }

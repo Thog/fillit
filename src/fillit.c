@@ -6,13 +6,13 @@
 /*   By: tguillem <tguillem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/02 17:22:59 by tguillem          #+#    #+#             */
-/*   Updated: 2015/12/02 19:55:01 by tguillem         ###   ########.fr       */
+/*   Updated: 2015/12/14 17:28:28 by bel-baz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-char	*fillit(char **shapes)
+char	*fillit(char *shapes)
 {
 	if (shapes == NULL)
 		return ("");
