@@ -6,7 +6,7 @@
 /*   By: tguillem <tguillem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/02 17:19:06 by tguillem          #+#    #+#             */
-/*   Updated: 2015/12/15 11:43:09 by tguillem         ###   ########.fr       */
+/*   Updated: 2015/12/15 15:22:25 by bel-baz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <fcntl.h>
+# include "pieces.h"
 
 char				*read_file(char *file);
 char				*prepare_fill(char *fname);

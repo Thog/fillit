@@ -6,7 +6,7 @@
 /*   By: tguillem <tguillem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/02 17:24:09 by tguillem          #+#    #+#             */
-/*   Updated: 2015/12/15 13:32:39 by tguillem         ###   ########.fr       */
+/*   Updated: 2015/12/15 15:12:36 by bel-baz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ char	***separe_shapes(char *file)
 		}
 		else
 		{
-		if (!l && !c)
+			if (!l && !c)
 				*(++result) = alloc_piece();
 			*(*(*(result) + c) + l++) = *file;
 		}
@@ -91,7 +91,6 @@ char	*parse_shapes(char ***shapes)
 	i = 0;
 	if ((parsed = (char*)malloc(sizeof(char) * nb)) == NULL)
 		return (NULL);
-	write(1, "test", 4);
 	while (i < nb)
 	{
 		chars = 0;
