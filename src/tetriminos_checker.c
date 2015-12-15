@@ -6,7 +6,7 @@
 /*   By: tguillem <tguillem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/02 17:24:09 by tguillem          #+#    #+#             */
-/*   Updated: 2015/12/15 11:46:21 by tguillem         ###   ########.fr       */
+/*   Updated: 2015/12/15 13:32:39 by tguillem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,11 +121,10 @@ char	*parse_shapes(char ***shapes)
 char	*prepare_fill(char *fname)
 {
 	char	*filecontent;
+	char	***shapes;
 
 	filecontent = read_file(fname);
-	if (!filecontent)
-	{
+	if (!filecontent || !(shapes = separe_shapes(filecontent)))
 		return (NULL);
-	}
-	return (parse_shapes(separe_shapes(filecontent)));
+	return (parse_shapes(shapes));
 }
