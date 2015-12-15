@@ -6,7 +6,7 @@
 /*   By: tguillem <tguillem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/02 17:24:09 by tguillem          #+#    #+#             */
-/*   Updated: 2015/12/14 17:31:03 by bel-baz          ###   ########.fr       */
+/*   Updated: 2015/12/15 11:46:21 by tguillem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ char	**alloc_piece(void)
 	return (result);
 }
 
-char	***separe_shapes(char *fcontent)
+char	***separe_shapes(char *file)
 {
 	char	***result;
 	char	***origin;
@@ -44,14 +44,15 @@ char	***separe_shapes(char *fcontent)
 	origin = result--;
 	if (!result)
 		return (NULL);
-	while (*fcontent)
+	ft_bzero(result, 27);
+	while (*file && (*file == '#' || *file == '.' || *file == '\n'))
 	{
 		if (c > 4 || l > 4)
 			return (NULL);
-		if (*fcontent == '\n')
+		if (*file == '\n')
 		{
 			l = 0;
-			if (*(fcontent + 1) == '\n' && (i = 1))
+			if (*(file + 1) == '\n' && (i = 1))
 				c = 0;
 			else if (!i)
 				c++;
@@ -60,13 +61,13 @@ char	***separe_shapes(char *fcontent)
 		}
 		else
 		{
-			if (!l && !c)
+		if (!l && !c)
 				*(++result) = alloc_piece();
-			*(*(*(result) + c) + l++) = *fcontent;
+			*(*(*(result) + c) + l++) = *file;
 		}
-		fcontent++;
+		file++;
 	}
-	return (origin);
+	return (*file ? NULL : origin);
 }
 
 char	*parse_shapes(char ***shapes)
@@ -85,6 +86,7 @@ char	*parse_shapes(char ***shapes)
 		nb++;
 		char c = nb + '0';
 		write(1, &c, 1);
+		i++;
 	}
 	i = 0;
 	if ((parsed = (char*)malloc(sizeof(char) * nb)) == NULL)

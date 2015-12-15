@@ -14,7 +14,7 @@ CFLAGS = -g -Wextra -Wall -Werror -I./includes
 CC = gcc
 
 NAME = fillit
-SRC = main.c ft_strlen.c fillit.c tetriminos_checker.c read_utils.c
+SRC = main.c ft_bzero.c ft_strlen.c fillit.c tetriminos_checker.c read_utils.c
 SRCDIR = src
 SRCS = $(addprefix $(SRCDIR)/, $(SRC))
 OBJ = $(SRC:.c=.o)
