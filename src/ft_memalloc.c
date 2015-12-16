@@ -1,23 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fillit.c                                           :+:      :+:    :+:   */
+/*   ft_memalloc.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tguillem <tguillem@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tguillem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/12/02 17:22:59 by tguillem          #+#    #+#             */
-/*   Updated: 2015/12/15 15:27:13 by tguillem         ###   ########.fr       */
+/*   Created: 2015/11/24 17:00:05 by tguillem          #+#    #+#             */
+/*   Updated: 2015/12/16 15:04:30 by tguillem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-char	*fillit(char *shapes)
+void	*ft_memalloc(size_t size)
 {
-	char	*result;
+	void *result;
 
-	if (shapes == NULL || !(result = (char*)malloc(sizeof(char) * 730)))
-		return ("");
-	ft_bzero(result, 730);
+	if (size == 0)
+		return (NULL);
+	result = malloc(sizeof(void *) * size);
+	if (result == NULL)
+		return (NULL);
+	ft_bzero(result, size);
 	return (result);
 }

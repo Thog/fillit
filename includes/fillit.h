@@ -6,7 +6,7 @@
 /*   By: tguillem <tguillem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/02 17:19:06 by tguillem          #+#    #+#             */
-/*   Updated: 2015/12/15 15:22:25 by bel-baz          ###   ########.fr       */
+/*   Updated: 2015/12/16 15:27:42 by tguillem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,10 @@
 
 char				*read_file(char *file);
 char				*prepare_fill(char *fname);
+int					draw_piece(char **board, int piece, int dx, int dy);
 char				*fillit(char *shapes);
 int					ft_strlen(const char *s);
 void				ft_bzero(void *s, size_t n);
+int					ft_strcmp(const char *s1, const char *s2);
+void				*ft_memalloc(size_t size);
 #endif

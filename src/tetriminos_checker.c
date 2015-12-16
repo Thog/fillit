@@ -6,11 +6,12 @@
 /*   By: tguillem <tguillem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/02 17:24:09 by tguillem          #+#    #+#             */
-/*   Updated: 2015/12/15 15:12:36 by bel-baz          ###   ########.fr       */
+/*   Updated: 2015/12/16 15:25:25 by tguillem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
+#include <stdio.h>
 
 char	**alloc_piece(void)
 {
@@ -24,12 +25,12 @@ char	**alloc_piece(void)
 	while (n--)
 	{
 		result[n] = (char*)malloc(sizeof(char) * 5);
-		result[n][4] = '\0';
+		ft_bzero(result[n], 5);
 	}
 	return (result);
 }
 
-char	***separe_shapes(char *file)
+int		separe_shapes(char *file, char ****shapes)
 {
 	char	***result;
 	char	***origin;
@@ -40,24 +41,17 @@ char	***separe_shapes(char *file)
 	c = 0;
 	l = 0;
 	i = 0;
-	result = (char ***)malloc(sizeof(char**) * 27);
+	result = *shapes;
 	origin = result--;
-	if (!result)
-		return (NULL);
-	ft_bzero(result, 27);
-	while (*file && (*file == '#' || *file == '.' || *file == '\n'))
+	while (*file && (*file == '#' || *file == '.' || *file == '\n')
+			&& ((c <= 4 || l <= 4) || (*(result + 1) = NULL)))
 	{
-		if (c > 4 || l > 4)
-			return (NULL);
-		if (*file == '\n')
+		if (*file == '\n' && (l = 0) + 1)
 		{
-			l = 0;
 			if (*(file + 1) == '\n' && (i = 1))
 				c = 0;
-			else if (!i)
+			else if (!i || (i = 0 && 0))
 				c++;
-			else
-				i = 0;
 		}
 		else
 		{
@@ -67,63 +61,23 @@ char	***separe_shapes(char *file)
 		}
 		file++;
 	}
-	return (*file ? NULL : origin);
-}
-
-char	*parse_shapes(char ***shapes)
-{
-	int		nb;
-	int		i;
-	int		j;
-	int		k;
-	int		chars;
-	char	*parsed;
-
-	nb = 0;
-	i = 0;
-	while (*(shapes + i))
-	{
-		nb++;
-		char c = nb + '0';
-		write(1, &c, 1);
-		i++;
-	}
-	i = 0;
-	if ((parsed = (char*)malloc(sizeof(char) * nb)) == NULL)
-		return (NULL);
-	while (i < nb)
-	{
-		chars = 0;
-		j = 0;
-		while (*(*(shapes + i) + j))
-		{
-			k = 0;
-			while (*(*(*(shapes + i) + j) + k))
-			{
-				if (*(*(*(shapes + i) + j) + k) == '#')
-					chars++;
-				k++;
-			}
-			j++;
-		}
-		if (chars > 4)
-		{
-			write(1, "error\n", 5);
-			return (NULL);
-		}
-		chars = 0;
-		i++;
-	}
-	return (parsed);
+	*shapes = origin;
+	return (*file ? 0 : 1);
 }
 
 char	*prepare_fill(char *fname)
 {
-	char	*filecontent;
+	char	*fcontent;
 	char	***shapes;
+	int		i;
 
-	filecontent = read_file(fname);
-	if (!filecontent || !(shapes = separe_shapes(filecontent)))
+	fcontent = read_file(fname);
+	if (!fcontent || !(shapes = (char ***)ft_memalloc(sizeof(char**) * 28)) ||
+			!separe_shapes(fcontent, &shapes))
 		return (NULL);
-	return (parse_shapes(shapes));
+	i = 0;
+	while (*(shapes + i) != NULL && i < 27)
+		i++;
+	printf("%d\n", i);
+	return (NULL);
 }

@@ -6,7 +6,7 @@
 /*   By: tguillem <tguillem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/02 17:05:08 by tguillem          #+#    #+#             */
-/*   Updated: 2015/12/14 17:28:08 by bel-baz          ###   ########.fr       */
+/*   Updated: 2015/12/16 15:07:34 by tguillem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ int	main(int argc, char **argv)
 		}
 		printf("%s\n", shapes);
 		result = fillit(shapes);
-		//write(1, result, ft_strlen(result));
 	}
 	else
 		write(1, "error\n", 5);

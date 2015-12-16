@@ -6,7 +6,7 @@
 /*   By: bel-baz <bel-baz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/15 15:22:58 by bel-baz           #+#    #+#             */
-/*   Updated: 2015/12/15 16:46:16 by bel-baz          ###   ########.fr       */
+/*   Updated: 2015/12/16 08:48:16 by tguillem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ static char	get_l(char **shape, int i, int j)
 	return (UNKNOWN);
 }
 
-static char	get_misc(char **shape)
+static char	get_misc(char **shape, int i, int j)
 {
 	if (*(*(shape + i + 1) + j) == '#' && *(*(shape + i + 1) + j -
 				1) == '#' && *(*(shape + i) + j + 1) == '#')
