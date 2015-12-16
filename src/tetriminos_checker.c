@@ -6,14 +6,25 @@
 /*   By: tguillem <tguillem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/02 17:24:09 by tguillem          #+#    #+#             */
-/*   Updated: 2015/12/16 15:25:25 by tguillem         ###   ########.fr       */
+/*   Updated: 2015/12/16 16:02:28 by tguillem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 #include <stdio.h>
 
-char	**alloc_piece(void)
+static	t_piece		*alloc_piece(void)
+{
+	t_piece		*result;
+
+	if (!(result = (t_piece*)malloc(sizeof(t_piece))))
+		return (NULL);
+	result->id = UNKNOWN;
+	result->letter = '\0';
+	return (result);
+}
+
+static char			**alloc_rawpiece(void)
 {
 	int		n;
 	char	**result;
@@ -30,7 +41,7 @@ char	**alloc_piece(void)
 	return (result);
 }
 
-int		separe_shapes(char *file, char ****shapes)
+static int		separe_shapes(char *file, char ****shapes)
 {
 	char	***result;
 	char	***origin;
@@ -56,7 +67,7 @@ int		separe_shapes(char *file, char ****shapes)
 		else
 		{
 			if (!l && !c)
-				*(++result) = alloc_piece();
+				*(++result) = alloc_rawpiece();
 			*(*(*(result) + c) + l++) = *file;
 		}
 		file++;
@@ -65,10 +76,12 @@ int		separe_shapes(char *file, char ****shapes)
 	return (*file ? 0 : 1);
 }
 
-char	*prepare_fill(char *fname)
+t_piece			*prepare_fill(char *fname)
 {
 	char	*fcontent;
 	char	***shapes;
+	t_piece	*pieces;
+	t_piece	*tmp;
 	int		i;
 
 	fcontent = read_file(fname);
@@ -77,7 +90,16 @@ char	*prepare_fill(char *fname)
 		return (NULL);
 	i = 0;
 	while (*(shapes + i) != NULL && i < 27)
+	{
+		if (!(tmp = alloc_piece()))
+			return (NULL);
+		tmp->letter = 'A' + i;
+		tmp->id = get_piece(*(shapes + i));
+		if (!pieces)
+			pieces = tmp;
+		else
+			pieces->next = tmp;
 		i++;
-	printf("%d\n", i);
-	return (NULL);
+	}
+	return (pieces);
 }

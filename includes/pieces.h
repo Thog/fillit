@@ -6,7 +6,7 @@
 /*   By: bel-baz <bel-baz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/15 15:12:42 by bel-baz           #+#    #+#             */
-/*   Updated: 2015/12/15 15:52:13 by bel-baz          ###   ########.fr       */
+/*   Updated: 2015/12/16 15:39:01 by tguillem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,11 @@
 # define BAR_VER 18
 # define SQUARE 19
 
-char	get_piece(char **shape);
+typedef struct			s_piece
+{
+	char				letter;
+	char				id;
+	struct s_piece		*next;
+}						t_piece;
+char					get_piece(char **shape);
 #endif
