@@ -6,7 +6,7 @@
 /*   By: bel-baz <bel-baz@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/15 15:22:58 by bel-baz           #+#    #+#             */
-/*   Updated: 2015/12/16 15:58:54 by tguillem         ###   ########.fr       */
+/*   Updated: 2015/12/17 10:52:43 by tguillem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,13 @@ static char	get_crown(char **shape, int i, int j)
 	if (*(*(shape + i + 1) + j) == '#' && *(*(shape + i + 1) + j +
 				1) == '#' && *(*(shape + i + 1) + j - 1) == '#')
 		return (CROWN_UP);
-	if (*(*(shape + i + 1) + j) == '#' && *(*(shape + i + 1) + j +
+	if (i < 2 && *(*(shape + i + 1) + j) == '#' && *(*(shape + i + 1) + j +
 				1) == '#' && *(*(shape + i + 2) + j) == '#')
 		return (CROWN_RIGHT);
-	if (*(*(shape + i + 1) + j) == '#' && *(*(shape + i + 1) + j -
+	if (i < 2 && *(*(shape + i + 1) + j) == '#' && *(*(shape + i + 1) + j -
 				1) == '#' && *(*(shape + i + 2) + j) == '#')
 		return (CROWN_LEFT);
-	if (*(*(shape + i) + j + 1) == '#' && *(*(shape + i + 1) + j +
+	if (i < 2 && *(*(shape + i) + j + 1) == '#' && *(*(shape + i + 1) + j +
 				1) == '#' && *(*(shape + i + 2) + j) == '#')
 		return (CROWN_DOWN);
 	return (UNKNOWN);
@@ -37,7 +37,7 @@ static char	get_l(char **shape, int i, int j)
 	if (*(*(shape + i + 1) + j) == '#' && *(*(shape + i) + j +
 				1) == '#' && *(*(shape + i + 2) + j) == '#')
 		return (L_LEFT_RIGHT);
-	if (*(*(shape + i + 1) + j) == '#' && *(*(shape + i + 2) + j -
+	if (i < 2 && *(*(shape + i + 1) + j) == '#' && *(*(shape + i + 2) + j -
 				1) == '#' && *(*(shape + i + 2) + j) == '#')
 		return (L_LEFT_LEFT);
 	if (*(*(shape + i + 1) + j + 2) == '#' && *(*(shape + i) + j +
