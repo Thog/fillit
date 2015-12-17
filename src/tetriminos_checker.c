@@ -6,21 +6,21 @@
 /*   By: tguillem <tguillem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/02 17:24:09 by tguillem          #+#    #+#             */
-/*   Updated: 2015/12/16 16:02:28 by tguillem         ###   ########.fr       */
+/*   Updated: 2015/12/17 11:51:19 by tguillem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 #include <stdio.h>
 
-static	t_piece		*alloc_piece(void)
+static t_piece		*alloc_piece(char letter, int id)
 {
 	t_piece		*result;
 
 	if (!(result = (t_piece*)malloc(sizeof(t_piece))))
 		return (NULL);
-	result->id = UNKNOWN;
-	result->letter = '\0';
+	result->id = id;
+	result->letter = letter;
 	return (result);
 }
 
@@ -41,7 +41,7 @@ static char			**alloc_rawpiece(void)
 	return (result);
 }
 
-static int		separe_shapes(char *file, char ****shapes)
+static int			separe_shapes(char *file, char ****shapes)
 {
 	char	***result;
 	char	***origin;
@@ -76,30 +76,38 @@ static int		separe_shapes(char *file, char ****shapes)
 	return (*file ? 0 : 1);
 }
 
-t_piece			*prepare_fill(char *fname)
+static void			piece_add(t_piece **piece, t_piece *node)
 {
-	char	*fcontent;
-	char	***shapes;
-	t_piece	*pieces;
-	t_piece	*tmp;
-	int		i;
+	if (*piece)
+		(*piece)->next = node;
+	else
+		*piece = node;
+}
+
+t_piece				*prepare_fill(char *fname)
+{
+	char		*fcontent;
+	char		***shapes;
+	t_piece		*data[3];
+	int			i;
 
 	fcontent = read_file(fname);
 	if (!fcontent || !(shapes = (char ***)ft_memalloc(sizeof(char**) * 28)) ||
-			!separe_shapes(fcontent, &shapes))
+			!separe_shapes(fcontent, &shapes) ||
+			(!(data[2] = alloc_piece('\0', UNKNOWN))))
 		return (NULL);
 	i = 0;
 	while (*(shapes + i) != NULL && i < 27)
 	{
-		if (!(tmp = alloc_piece()))
+		if (!(data[1] = alloc_piece('A' + i, get_piece(*(shapes + i)))))
 			return (NULL);
-		tmp->letter = 'A' + i;
-		tmp->id = get_piece(*(shapes + i));
-		if (!pieces)
-			pieces = tmp;
-		else
-			pieces->next = tmp;
+		if (!i)
+			data[0] = data[1];
+		piece_add((data + 2), data[1]);
+		data[2] = data[1];
 		i++;
 	}
-	return (pieces);
+	free(fcontent);
+	free(shapes);
+	return (data[0]);
 }
