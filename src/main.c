@@ -6,7 +6,7 @@
 /*   By: tguillem <tguillem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/02 17:05:08 by tguillem          #+#    #+#             */
-/*   Updated: 2015/12/17 16:28:46 by bel-baz          ###   ########.fr       */
+/*   Updated: 2015/12/17 17:31:06 by bel-baz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void    disp_pieces(t_piece *pieces)
 
 int	main(int argc, char **argv)
 {
-	char	*result;
+	char	**result;
 	t_piece	*pieces;
 
 	if (argc == 2)
