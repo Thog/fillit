@@ -6,23 +6,12 @@
 /*   By: tguillem <tguillem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/02 17:24:09 by tguillem          #+#    #+#             */
-/*   Updated: 2015/12/17 11:51:19 by tguillem         ###   ########.fr       */
+/*   Updated: 2015/12/21 02:07:39 by tguillem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 #include <stdio.h>
-
-static t_piece		*alloc_piece(char letter, int id)
-{
-	t_piece		*result;
-
-	if (!(result = (t_piece*)malloc(sizeof(t_piece))))
-		return (NULL);
-	result->id = id;
-	result->letter = letter;
-	return (result);
-}
 
 static char			**alloc_rawpiece(void)
 {
@@ -74,14 +63,6 @@ static int			separe_shapes(char *file, char ****shapes)
 	}
 	*shapes = origin;
 	return (*file ? 0 : 1);
-}
-
-static void			piece_add(t_piece **piece, t_piece *node)
-{
-	if (*piece)
-		(*piece)->next = node;
-	else
-		*piece = node;
 }
 
 t_piece				*prepare_fill(char *fname)

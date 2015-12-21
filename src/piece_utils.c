@@ -1,44 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   piece_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tguillem <tguillem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/12/02 17:05:08 by tguillem          #+#    #+#             */
-/*   Updated: 2015/12/21 01:46:37 by tguillem         ###   ########.fr       */
+/*   Created: 2015/12/21 01:57:07 by tguillem          #+#    #+#             */
+/*   Updated: 2015/12/21 02:27:32 by tguillem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
-#include <stdio.h>
 
-void	disp_pieces(t_piece *pieces)
+t_piece		*alloc_piece(char letter, int id)
 {
-	while (pieces)
-	{
-		printf("%s", &(pieces->letter));
-		printf(" %d\n", (pieces->id));
-		pieces = pieces->next;
-	}
+	t_piece		*result;
+
+	if (!(result = (t_piece*)malloc(sizeof(t_piece))))
+		return (NULL);
+	result->id = id;
+	result->letter = letter;
+	return (result);
 }
 
-int		main(int argc, char **argv)
+void		piece_add(t_piece **piece, t_piece *node)
 {
-	char	**result;
-	t_piece	*pieces;
-
-	if (argc == 2)
-	{
-		if (!(pieces = prepare_fill(*(argv + 1))))
-		{
-			write(1, "error\n", 5);
-			return (0);
-		}
-		disp_pieces(pieces);
-		result = fillit(pieces);
-	}
+	if (*piece)
+		(*piece)->next = node;
 	else
-		write(1, "error\n", 5);
-	return (0);
+		*piece = node;
 }

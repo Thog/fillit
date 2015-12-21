@@ -6,17 +6,17 @@
 /*   By: tguillem <tguillem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/02 17:22:59 by tguillem          #+#    #+#             */
-/*   Updated: 2015/12/17 17:29:23 by bel-baz          ###   ########.fr       */
+/*   Updated: 2015/12/21 01:47:41 by tguillem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 #include <stdio.h>
 
-char	**alloc_grid()
+char	**alloc_grid(void)
 {
 	int		i;
-	char 	**result;
+	char	**result;
 
 	i = 0;
 	if ((result = (char**)malloc(sizeof(char*) * 730)) == NULL)
