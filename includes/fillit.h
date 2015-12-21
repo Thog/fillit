@@ -6,7 +6,7 @@
 /*   By: tguillem <tguillem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/02 17:19:06 by tguillem          #+#    #+#             */
-/*   Updated: 2015/12/17 17:29:39 by bel-baz          ###   ########.fr       */
+/*   Updated: 2015/12/21 02:20:17 by tguillem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,4 +25,6 @@ int					ft_strlen(const char *s);
 void				ft_bzero(void *s, size_t n);
 int					ft_strcmp(const char *s1, const char *s2);
 void				*ft_memalloc(size_t size);
+t_piece				*alloc_piece(char letter, int id);
+void				piece_add(t_piece **piece, t_piece *node);
 #endif
