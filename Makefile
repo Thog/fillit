@@ -15,7 +15,9 @@ CC = gcc
 
 NAME = fillit
 SRC = main.c ft_bzero.c fillit.c tetriminos_checker.c \
-	  read_utils.c ft_strsub.c ft_strnew.c ft_strlen.c
+	  read_utils.c ft_strsub.c ft_strnew.c ft_strlen.c \
+	  tetriminos_algo.c tetriminos_utils.c ft_isalpha.c \
+	  ft_strdup.c
 SRCDIR = src
 SRCS = $(addprefix $(SRCDIR)/, $(SRC))
 OBJ = $(SRC:.c=.o)
