@@ -32,21 +32,21 @@ int		size_file(char *file)
 char	*read_file(char *file)
 {
 	int		fd;
-	int		i;
-	char	*buff;
+	char	*buffer;
 
-	i = size_file(file);
-	fd = open(file, O_RDWR);
 	if ((fd = open(file, O_RDONLY)) < 0)
 		ft_error();
-	buff = ft_strnew(i);
-	if (read(fd, buff, i) < 0)
+	buffer = ft_strnew(BUFF_SIZE);
+	ft_bzero(buffer, BUFF_SIZE);
+	if (read(fd, buffer, BUFF_SIZE) < 0)
 		ft_error();
-	if (ft_strlen(buff) < 20 || buff[i - 1] != '\0')
+	if (ft_strlen(buffer) < 20 || buffer[BUFF_SIZE - 1] != '\0')
 		ft_error();
-	if (buff[ft_strlen(buff) - 1] == '\n' && (buff[ft_strlen(buff) - 2] != '.'
-				&& buff[ft_strlen(buff) - 2] != '#'))
+	if (buffer[ft_strlen(buffer) - 1] == '\n' && (buffer[ft_strlen(buffer) - 2] != '.'
+				&& buffer[ft_strlen(buffer) - 2] != '#'))
+	{
 		ft_error();
+	}
 	close(fd);
-	return (buff);
+	return (buffer);
 }
