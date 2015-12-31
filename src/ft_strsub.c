@@ -1,26 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memalloc.c                                      :+:      :+:    :+:   */
+/*   ft_strsub.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tguillem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/11/24 17:00:05 by tguillem          #+#    #+#             */
-/*   Updated: 2015/12/16 15:04:30 by tguillem         ###   ########.fr       */
+/*   Created: 2015/11/25 08:53:39 by tguillem          #+#    #+#             */
+/*   Updated: 2015/11/26 11:37:47 by tguillem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
+#include <stdlib.h>
 
-void	*ft_memalloc(size_t size)
+char	*ft_strncpy(char *s1, const char *s2, size_t n)
 {
-	void *result;
+	unsigned int		i;
 
-	if (size == 0)
+	i = 0;
+	while (i < n && s2[i])
+	{
+		s1[i] = s2[i];
+		i++;
+	}
+	while (i < n)
+	{
+		s1[i] = '\0';
+		i++;
+	}
+	return (s1);
+}
+
+char	*ft_strsub(const char *s, unsigned int start, size_t len)
+{
+	char	*result;
+
+	result = (char *)malloc(sizeof(char) * (len + 1));
+	if (!result)
 		return (NULL);
-	result = malloc(sizeof(void *) * size);
-	if (result == NULL)
-		return (NULL);
-	ft_bzero(result, size);
+	result = ft_strncpy(result, (s + start), len);
+	result[len] = '\0';
 	return (result);
 }

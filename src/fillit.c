@@ -11,32 +11,45 @@
 /* ************************************************************************** */
 
 #include "fillit.h"
-#include <stdio.h>
 
-char	**alloc_grid(void)
+static void		free_tetriminos(char **tetris)
 {
-	int		i;
-	char	**result;
+	int	i;
 
 	i = 0;
-	if ((result = (char**)malloc(sizeof(char*) * 730)) == NULL)
-		return (NULL);
-	while (i < 730)
+	while (tetris[i] != NULL)
 	{
-		if ((*(result + i) = (char*)malloc(sizeof(char) * 730)) == NULL)
-			return (NULL);
+		free(tetris[i]);
 		i++;
 	}
-	return (result);
+	free(tetris);
 }
 
-char	**fillit(t_piece *pieces)
+void			fillit(char *fname)
 {
-	char	**result;
+	char	**tetris;
+	char	*fcontent;
+	int		i;
+	int		j;
 
-	printf("%d\n", pieces->id);
-	if (pieces == NULL || !(result = alloc_grid()))
-		return (NULL);
-	ft_bzero(result, 730);
-	return (result);
+	i = 20;
+	j = 0;
+	fcontent =  read_file(fname);
+	tetris = (char **)malloc(sizeof(char*) * 27);
+	while(fcontent[++i])
+	{
+		if (!(i % 21))
+		{
+			tetris[j] = check_tetriminos(ft_strsub(fcontent, i - 21, 20), j);
+			j++;
+		}
+	}
+
+	if (!fcontent[i])
+		tetris[j] = check_tetriminos(ft_strsub(fcontent, i - 21, 20), j);
+
+	tetris[j + 1] = NULL;
+	free(fcontent);
+	solve_tetriminos(tetris, j);
+	free_tetriminos(tetris);
 }

@@ -15,16 +15,14 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <fcntl.h>
-# include "pieces.h"
 
-char				*read_file(char *file);
-t_piece				*prepare_fill(char *fname);
-int					draw_piece(char **board, int piece, int dx, int dy);
-char				**fillit(t_piece *pieces);
-int					ft_strlen(const char *s);
-void				ft_bzero(void *s, size_t n);
-int					ft_strcmp(const char *s1, const char *s2);
-void				*ft_memalloc(size_t size);
-t_piece				*alloc_piece(char letter, int id);
-void				piece_add(t_piece **piece, t_piece *node);
+char	*ft_strsub(const char *s, unsigned int start, size_t len);
+void	ft_bzero(void *s, size_t n);
+char	*ft_strnew(size_t size);
+char	*read_file(char *file);
+void	ft_error(void);
+void	fillit(char *fname);
+char	*check_tetriminos(char *tetri, int id);
+void	solve_tetriminos(char **tetris, int id);
+size_t	ft_strlen(const char *s);
 #endif

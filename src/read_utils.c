@@ -33,23 +33,20 @@ char	*read_file(char *file)
 {
 	int		fd;
 	int		i;
-	char	*result;
-	char	buffer[1];
+	char	*buff;
 
 	i = size_file(file);
 	fd = open(file, O_RDWR);
-	if (fd > 2 && i != 0)
-	{
-		result = (char *)malloc(i + 1);
-		if (result == NULL)
-			return (NULL);
-		i = -1;
-		while (read(fd, &buffer, 1))
-			result[++i] = buffer[0];
-		if (close(fd) == -1)
-			return (NULL);
-		result[++i] = '\0';
-		return (result);
-	}
-	return (NULL);
+	if ((fd = open(file, O_RDONLY)) < 0)
+		ft_error();
+	buff = ft_strnew(i);
+	if (read(fd, buff, i) < 0)
+		ft_error();
+	if (ft_strlen(buff) < 20 || buff[i - 1] != '\0')
+		ft_error();
+	if (buff[ft_strlen(buff) - 1] == '\n' && (buff[ft_strlen(buff) - 2] != '.'
+				&& buff[ft_strlen(buff) - 2] != '#'))
+		ft_error();
+	close(fd);
+	return (buff);
 }

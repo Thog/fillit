@@ -11,84 +11,51 @@
 /* ************************************************************************** */
 
 #include "fillit.h"
-#include <stdio.h>
 
-static char			**alloc_rawpiece(void)
+static int		transform_and_check(char *tetri, char id, int index)
 {
-	int		n;
-	char	**result;
+	int		result;
 
-	n = 4;
-	result = (char **)malloc(sizeof(char*) * 4);
-	if (!result)
-		return (NULL);
-	while (n--)
+	result = 0;
+	if (tetri[index] == '#' && index >= 0 && index <= 20 && result <= 4)
 	{
-		result[n] = (char*)malloc(sizeof(char) * 5);
-		ft_bzero(result[n], 5);
+		result++;
+		tetri[index] = id + 'a';
+		result += transform_and_check(tetri, id, index + 1);
+		result += transform_and_check(tetri, id, index - 1);
+		result += transform_and_check(tetri, id, index + 5);
+		result += transform_and_check(tetri, id, index - 5);
 	}
 	return (result);
 }
 
-static int			separe_shapes(char *file, char ****shapes)
+static int		internal_check(char *tetri, int id)
 {
-	char	***result;
-	char	***origin;
-	int		c;
-	int		l;
 	int		i;
+	int		j;
+	int		k;
 
-	c = 0;
-	l = 0;
 	i = 0;
-	result = *shapes;
-	origin = result--;
-	while (*file && (*file == '#' || *file == '.' || *file == '\n')
-			&& ((c <= 4 || l <= 4) || (*(result + 1) = NULL)))
+	j = 0;
+	k = 0;
+	while(tetri[i])
 	{
-		if (*file == '\n' && (l = 0) + 1)
-		{
-			if (*(file + 1) == '\n' && (i = 1))
-				c = 0;
-			else if (!i || (i = 0 && 0))
-				c++;
-		}
-		else
-		{
-			if (!l && !c)
-				*(++result) = alloc_rawpiece();
-			*(*(*(result) + c) + l++) = *file;
-		}
-		file++;
-	}
-	*shapes = origin;
-	return (*file ? 0 : 1);
-}
-
-t_piece				*prepare_fill(char *fname)
-{
-	char		*fcontent;
-	char		***shapes;
-	t_piece		*data[3];
-	int			i;
-
-	fcontent = read_file(fname);
-	if (!fcontent || !(shapes = (char ***)ft_memalloc(sizeof(char**) * 28)) ||
-			!separe_shapes(fcontent, &shapes) ||
-			(!(data[2] = alloc_piece('\0', UNKNOWN))))
-		return (NULL);
-	i = 0;
-	while (*(shapes + i) != NULL && i < 27)
-	{
-		if (!(data[1] = alloc_piece('A' + i, get_piece(*(shapes + i)))))
-			return (NULL);
-		if (!i)
-			data[0] = data[1];
-		piece_add((data + 2), data[1]);
-		data[2] = data[1];
+		if (tetri[i] == '.')
+			k++;
+		else if (tetri[i] == '#')
+			j = transform_and_check(tetri, id, i);
 		i++;
 	}
-	free(fcontent);
-	free(shapes);
-	return (data[0]);
+	return (i == 20 && j == 4 && k == 12);
+}
+
+char			*check_tetriminos(char *tetri, int id)
+{
+	if (internal_check(tetri, id))
+			return (tetri);
+	else
+	{
+		ft_error();
+		return (NULL);
+	}
 }

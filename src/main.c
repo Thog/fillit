@@ -13,32 +13,23 @@
 #include "fillit.h"
 #include <stdio.h>
 
-void	disp_pieces(t_piece *pieces)
+void	ft_error(void)
 {
-	while (pieces)
-	{
-		printf("%s", &(pieces->letter));
-		printf(" %d\n", (pieces->id));
-		pieces = pieces->next;
-	}
+	write(2, "error\n", 6);
+	exit(EXIT_FAILURE);
 }
 
 int		main(int argc, char **argv)
 {
-	char	**result;
-	t_piece	*pieces;
 
 	if (argc == 2)
 	{
-		if (!(pieces = prepare_fill(*(argv + 1))))
-		{
-			write(1, "error\n", 5);
-			return (0);
-		}
-		disp_pieces(pieces);
-		result = fillit(pieces);
+		fillit(argv[1]);
 	}
 	else
-		write(1, "error\n", 5);
+	{
+		write(2, "error\n", 6);
+		return (EXIT_FAILURE);
+	}
 	return (0);
 }
