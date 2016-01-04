@@ -6,7 +6,7 @@
 /*   By: tguillem <tguillem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/02 17:24:09 by tguillem          #+#    #+#             */
-/*   Updated: 2015/12/21 02:07:39 by tguillem         ###   ########.fr       */
+/*   Updated: 2016/01/04 08:17:27 by tguillem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static int		internal_check(char *tetri, int id)
 	i = 0;
 	j = 0;
 	k = 0;
-	while(tetri[i])
+	while (tetri[i])
 	{
 		if (tetri[i] == '.')
 			k++;
@@ -52,7 +52,7 @@ static int		internal_check(char *tetri, int id)
 char			*check_tetriminos(char *tetri, int id)
 {
 	if (internal_check(tetri, id))
-			return (tetri);
+		return (tetri);
 	else
 	{
 		ft_error();

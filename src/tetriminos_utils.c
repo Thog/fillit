@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   tetriminos_utils.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tguillem <tguillem@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/01/04 08:15:39 by tguillem          #+#    #+#             */
+/*   Updated: 2016/01/04 08:16:20 by tguillem         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fillit.h"
 
-int		side_size(char *str)
+int			side_size(char *str)
 {
 	int		i;
 
@@ -10,7 +22,7 @@ int		side_size(char *str)
 	return (i);
 }
 
-int		min_grid_size(int tetriminos_nb)
+int			min_grid_size(int tetriminos_nb)
 {
 	int side;
 
@@ -20,7 +32,7 @@ int		min_grid_size(int tetriminos_nb)
 	return (side);
 }
 
-void	fill_grid(char *grid, int size)
+void		fill_grid(char *grid, int size)
 {
 	int		i;
 

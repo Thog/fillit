@@ -6,7 +6,7 @@
 /*   By: tguillem <tguillem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/02 17:22:59 by tguillem          #+#    #+#             */
-/*   Updated: 2015/12/21 01:47:41 by tguillem         ###   ########.fr       */
+/*   Updated: 2016/01/04 08:12:56 by tguillem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,9 @@ void			fillit(char *fname)
 
 	i = 20;
 	j = 0;
-	fcontent =  read_file(fname);
+	fcontent = read_file(fname);
 	tetris = (char **)malloc(sizeof(char*) * 27);
-	while(fcontent[++i])
+	while (fcontent[++i])
 	{
 		if (!(i % 21))
 		{
@@ -44,10 +44,8 @@ void			fillit(char *fname)
 			j++;
 		}
 	}
-
 	if (!fcontent[i])
 		tetris[j] = check_tetriminos(ft_strsub(fcontent, i - 21, 20), j);
-
 	tetris[j + 1] = NULL;
 	free(fcontent);
 	solve_tetriminos(tetris, j);

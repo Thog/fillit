@@ -6,7 +6,7 @@
 /*   By: tguillem <tguillem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/02 19:37:07 by tguillem          #+#    #+#             */
-/*   Updated: 2015/12/02 19:53:13 by tguillem         ###   ########.fr       */
+/*   Updated: 2016/01/04 08:19:05 by tguillem         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,9 @@ char	*read_file(char *file)
 		ft_error();
 	if (ft_strlen(buffer) < 20 || buffer[BUFF_SIZE - 1] != '\0')
 		ft_error();
-	if (buffer[ft_strlen(buffer) - 1] == '\n' && (buffer[ft_strlen(buffer) - 2] != '.'
-				&& buffer[ft_strlen(buffer) - 2] != '#'))
+	if (buffer[ft_strlen(buffer) - 1] == '\n' &&
+			(buffer[ft_strlen(buffer) - 2] != '.' &&
+			buffer[ft_strlen(buffer) - 2] != '#'))
 	{
 		ft_error();
 	}
