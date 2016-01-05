@@ -6,7 +6,7 @@
 /*   By: tguillem <tguillem@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/04 08:15:22 by tguillem          #+#    #+#             */
-/*   Updated: 2016/01/04 08:15:25 by tguillem         ###   ########.fr       */
+/*   Updated: 2016/01/05 14:19:53 by bel-baz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,12 @@ static int			place_mino(char *grid, char *tetris, int j, int i)
 	return (t);
 }
 
+static int			free_with_return(void *p)
+{
+	free(p);
+	return (1);
+}
+
 static int			internal_solve(char **grid, char **tetris, int i, int size)
 {
 	int		index[2];
@@ -53,7 +59,7 @@ static int			internal_solve(char **grid, char **tetris, int i, int size)
 			continue ;
 		}
 		if (internal_solve(grid, tetris, i + 1, size))
-			return (1);
+			return (free_with_return(tmp));
 		free(*grid);
 		*grid = ft_strdup(tmp);
 	}
@@ -65,11 +71,13 @@ void				solve_tetriminos(char **tetris, int id)
 {
 	char	*grid;
 	int		grid_size;
+	char	**local_tetris;
 
+	local_tetris = tetris;
 	grid_size = min_grid_size(id);
 	grid = ft_strnew((grid_size * grid_size) + grid_size);
 	fill_grid(grid, grid_size);
-	while (!internal_solve(&grid, tetris, 0, grid_size))
+	while (!internal_solve(&grid, local_tetris, 0, grid_size))
 	{
 		grid = resize_grid(grid, ++grid_size);
 	}
