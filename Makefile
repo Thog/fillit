@@ -21,11 +21,16 @@ SRC = main.c ft_bzero.c fillit.c tetriminos_checker.c \
 SRCDIR = src
 SRCS = $(addprefix $(SRCDIR)/, $(SRC))
 OBJ = $(SRC:.c=.o)
+
 all: $(NAME)
 
-
-$(NAME):
-	@$(CC) $(CFLAGS) $(SRCS) -o $(NAME)
+$(NAME): $(OBJ)
+	@echo "Packing to $(NAME)..."
+	@$(CC) -o $(NAME) $(CFLAGS) $(OBJ)
+	@echo "Done!"
+%.o: $(SRCDIR)/%.c
+	@echo "Building $?..."
+	@$(CC) -o $@ -c $? $(CFLAGS)
 
 clean:
 	@/bin/rm -f $(OBJ)
