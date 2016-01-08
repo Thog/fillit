@@ -13,32 +13,32 @@
 #include "fillit.h"
 #include <stdlib.h>
 
-char	*ft_strncpy(char *s1, const char *s2, size_t n)
+t_tetrimino	*ft_strncpy(t_tetrimino *s1, const t_tetrimino *s2, size_t n)
 {
 	unsigned int		i;
 
 	i = 0;
 	while (i < n && s2[i])
 	{
-		s1[i] = s2[i];
+		s1[i]->data = s2[i]->data;
 		i++;
 	}
 	while (i < n)
 	{
-		s1[i] = '\0';
+		s1[i]->data = '\0';
 		i++;
 	}
 	return (s1);
 }
 
-char	*ft_strsub(const char *s, unsigned int start, size_t len)
+t_tetrimino	*ft_strsub(const t_tetrimino *s, unsigned int start, size_t len)
 {
-	char	*result;
+	t_tetrimino	*result;
 
-	result = (char *)malloc(sizeof(char) * (len + 1));
+	result = (t_tetrimino *)malloc(sizeof(t_tetrimino) * (len + 1));
 	if (!result)
 		return (NULL);
 	result = ft_strncpy(result, (s + start), len);
-	result[len] = '\0';
+	result[len]->data = '\0';
 	return (result);
 }

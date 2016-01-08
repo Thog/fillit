@@ -12,15 +12,15 @@
 
 #include "fillit.h"
 
-static int		transform_and_check(char *tetri, char id, int index)
+static int		transform_and_check(t_tetrimino *tetri, char id, int index)
 {
 	int		result;
 
 	result = 0;
-	if (tetri[index] == '#' && index >= 0 && index <= 20 && result <= 4)
+	if (tetri[index]->data == '#' && index >= 0 && index <= 20 && result <= 4)
 	{
 		result++;
-		tetri[index] = id + 'a';
+		tetri[index]->data = id + 'a';
 		result += transform_and_check(tetri, id, index + 1);
 		result += transform_and_check(tetri, id, index - 1);
 		result += transform_and_check(tetri, id, index + 5);
@@ -29,7 +29,7 @@ static int		transform_and_check(char *tetri, char id, int index)
 	return (result);
 }
 
-static int		internal_check(char *tetri, int id)
+static int		internal_check(t_tetrimino *tetri, int id)
 {
 	int		i;
 	int		j;
@@ -40,16 +40,16 @@ static int		internal_check(char *tetri, int id)
 	k = 0;
 	while (tetri[i])
 	{
-		if (tetri[i] == '.')
+		if (tetri[i]->data == '.')
 			k++;
-		else if (tetri[i] == '#')
+		else if (tetri[i]->data == '#')
 			j = transform_and_check(tetri, id, i);
 		i++;
 	}
 	return (i == 20 && j == 4 && k == 12);
 }
 
-char			*check_tetriminos(char *tetri, int id)
+t_tetrimino			*check_tetriminos(t_tetrimino *tetri, int id)
 {
 	if (internal_check(tetri, id))
 		return (tetri);

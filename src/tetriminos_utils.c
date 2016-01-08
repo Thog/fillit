@@ -12,12 +12,12 @@
 
 #include "fillit.h"
 
-int			side_size(char *str)
+int			side_size(t_cell *str)
 {
 	int		i;
 
 	i = 0;
-	while (str[i] != '\n')
+	while (str[i]->data != '\n')
 		i++;
 	return (i);
 }
@@ -32,23 +32,23 @@ int			min_grid_size(int tetriminos_nb)
 	return (side);
 }
 
-void		fill_grid(char *grid, int size)
+void		fill_grid(t_cell *grid, int size)
 {
 	int		i;
 
 	i = 0;
 	while (i < (size * size) + size)
 	{
-		grid[i] = '.';
+		grid[i]->data = '.';
 		if (i > 0 && (i + 1) % (size + 1) == 0)
-			grid[i] = '\n';
+			grid[i]->data = '\n';
 		i++;
 	}
 }
 
-char		*resize_grid(char *grid, int size)
+t_cell		*resize_grid(t_cell *grid, int size)
 {
-	char	*tmp;
+	t_cell	*tmp;
 	int		i;
 	int		j;
 
@@ -58,11 +58,11 @@ char		*resize_grid(char *grid, int size)
 	fill_grid(tmp, size);
 	while (grid[i])
 	{
-		if (grid[i] != '\n')
+		if (grid[i]->data != '\n')
 			tmp[j] = grid[i];
-		else if (grid[i] == '\n')
+		else if (grid[i]->data == '\n')
 		{
-			tmp[j] = '.';
+			tmp[j]->data = '.';
 			j++;
 			tmp[j] = grid[i];
 		}
@@ -73,19 +73,19 @@ char		*resize_grid(char *grid, int size)
 	return (tmp);
 }
 
-void		reset_grids(char *grid, char *tetris, int i, int j)
+void		reset_grids(t_cell *grid, t_tetrimino *tetris, int i, int j)
 {
 	while (grid[i])
 	{
-		if (grid[i] == ('A' + j))
-			grid[i] = '.';
+		if (grid[i]->data == ('A' + j))
+			grid[i]->data = '.';
 		i++;
 	}
 	i = 0;
 	while (tetris[i])
 	{
-		if (tetris[i] == ('A' + j))
-			tetris[i] += 32;
+		if (tetris[i]->data == ('A' + j))
+			tetris[i]->data += 32;
 		i++;
 	}
 }

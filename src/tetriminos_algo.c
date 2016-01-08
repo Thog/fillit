@@ -12,7 +12,7 @@
 
 #include "fillit.h"
 
-static int			place_mino(char *grid, char *tetris, int j, int i)
+static int			place_mino(t_cell *grid, t_tetrimino *tetris, int j, int i)
 {
 	int		t;
 	int		size;
@@ -20,10 +20,10 @@ static int			place_mino(char *grid, char *tetris, int j, int i)
 	size = side_size(grid);
 	t = 0;
 	if (i >= 0 && i <= 20 && j >= 0 && j <= ((size * size) + size - 1) &&
-			grid[j] == '.' && tetris[i] >= 'a' && tetris != NULL)
+			grid[j]->data == '.' && tetris[i]->data >= 'a' && tetris != NULL)
 	{
-		tetris[i] -= 32;
-		grid[j] = tetris[i];
+		tetris[i]->data -= 32;
+		grid[j]->data = tetris[i]->data;
 		t++;
 		t += place_mino(grid, tetris, j + 1, i + 1);
 		t += place_mino(grid, tetris, j + (size + 1), i + 5);
@@ -38,10 +38,10 @@ static int			free_with_return(void *p)
 	return (1);
 }
 
-static int			internal_solve(char **grid, char **tetris, int i, int size)
+static int			internal_solve(t_cell **grid, t_tetrimino **tetris, int i, int size)
 {
 	int		index[2];
-	char	*tmp;
+	t_cell	*tmp;
 
 	if (tetris[i] == NULL)
 		return (1);
@@ -50,7 +50,7 @@ static int			internal_solve(char **grid, char **tetris, int i, int size)
 	index[1] = 0;
 	while ((*grid)[index[0]])
 	{
-		while (!ft_isalpha(tetris[i][index[1]]))
+		while (!ft_isalpha(tetris[i][index[1]]->data))
 			index[1]++;
 		if (place_mino(*grid, tetris[i], index[0], index[1]) != 4)
 		{
@@ -67,11 +67,11 @@ static int			internal_solve(char **grid, char **tetris, int i, int size)
 	return (0);
 }
 
-void				solve_tetriminos(char **tetris, int id)
+void				solve_tetriminos(t_tetrimino **tetris, int id)
 {
-	char	*grid;
+	t_cell	*grid;
 	int		grid_size;
-	char	**local_tetris;
+	t_tetrimino	**local_tetris;
 
 	local_tetris = tetris;
 	grid_size = min_grid_size(id);

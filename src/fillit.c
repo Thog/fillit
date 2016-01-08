@@ -27,15 +27,15 @@ static void		free_tetriminos(char **tetris)
 
 void			fillit(char *fname)
 {
-	char	**tetris;
-	char	*fcontent;
+	t_tetrimino	**tetris;
+	t_tetrimino	*fcontent;
 	int		i;
 	int		j;
 
 	i = 20;
 	j = 0;
 	fcontent = read_file(fname);
-	tetris = (char **)malloc(sizeof(char*) * 27);
+	tetris = (t_tetrimino **)malloc(sizeof(t_tetrimino*) * 27);
 	while (fcontent[++i])
 	{
 		if (!(i % 21))
