@@ -6,14 +6,14 @@
 /*   By: tguillem <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/25 08:53:39 by tguillem          #+#    #+#             */
-/*   Updated: 2015/11/26 11:37:47 by tguillem         ###   ########.fr       */
+/*   Updated: 2016/01/11 13:50:37 by bel-baz          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 #include <stdlib.h>
 
-char	*ft_strncpy(char *s1, const char *s2, size_t n)
+static char		*ft_strncpy(char *s1, const char *s2, size_t n)
 {
 	unsigned int		i;
 
@@ -31,7 +31,7 @@ char	*ft_strncpy(char *s1, const char *s2, size_t n)
 	return (s1);
 }
 
-char	*ft_strsub(const char *s, unsigned int start, size_t len)
+char			*ft_strsub(const char *s, unsigned int start, size_t len)
 {
 	char	*result;
 
